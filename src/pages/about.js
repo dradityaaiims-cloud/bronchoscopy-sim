@@ -27,11 +27,11 @@ const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>'
 const a = (href, text) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`;
 
 function citations() {
-  const url = location.origin + location.pathname.replace(/index\.html$/, '');
   return {
-    apaText: `Singh, A. (${CONFIG.year}). ${CONFIG.title} (Version ${CONFIG.version}) [Computer software]. ${url}`,
-    apa: `Singh, A. (${CONFIG.year}). <i>${esc(CONFIG.title)}</i> (Version ${CONFIG.version}) [Computer software]. ${esc(url)}`,
-    bib: `@software{singh_bronchsim_${CONFIG.year},\n  author  = {Singh, Aditya},\n  title   = {${CONFIG.title}},\n  year    = {${CONFIG.year}},\n  version = {${CONFIG.version}},\n  url     = {${url}}\n}`,
+    apaText: `Singh, A. (${CONFIG.year}). ${CONFIG.title} (Version ${CONFIG.version}) [Computer software]. https://doi.org/${CONFIG.doi}`,
+    apa: `Singh, A. (${CONFIG.year}). <i>${esc(CONFIG.title)}</i> (Version ${CONFIG.version}) [Computer software]. https://doi.org/${CONFIG.doi}`,
+    bib: `@software{singh_bronchsim_${CONFIG.year},\n  author  = {Singh, Aditya},\n  title   = {${CONFIG.title}},\n  year    = {${CONFIG.year}},\n  version = {${CONFIG.version}},\n  doi     = {${CONFIG.doi}},
+  url     = {https://doi.org/${CONFIG.doi}}\n}`,
   };
 }
 
@@ -61,7 +61,7 @@ export function renderAbout(box) {
 </div>
 
 <h3>Cite this tool</h3>
-<p>If you use this simulator in teaching or in a publication, please cite it. A DOI will be added once a release is archived.</p>
+<p>If you use this simulator in teaching or in a publication, please cite it (DOI: <a href="https://doi.org/${CONFIG.doi}" target="_blank" rel="noopener noreferrer">${CONFIG.doi}</a>).</p>
 <p><b>APA</b></p><pre class="cite">${c.apa}</pre><button data-copy="apa">Copy APA</button>
 <p><b>BibTeX</b></p><pre class="cite">${esc(c.bib)}</pre><button data-copy="bib">Copy BibTeX</button>
 

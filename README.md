@@ -158,6 +158,10 @@ Divergence is designed in: in cases 5 and 6 the displayed target points at a *ne
 
 `.github/workflows/pages.yml` builds and deploys on push to `main`. In the repo settings, set **Pages → Source → GitHub Actions**.
 
+## Cite
+
+Singh, A. (2026). *Dr. Singh's Bronchoscopy Simulator* (Version 0.2.0) [Computer software]. https://doi.org/10.5281/zenodo.23644439 (see `CITATION.cff`). Please also credit the AeroPath dataset (CC BY 4.0).
+
 ## License
 
 MIT — see `LICENSE`. Educational use only; see the disclaimer above.

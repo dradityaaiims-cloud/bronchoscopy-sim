@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Dr. Singh's Bronchoscopy Simulator: an open educational bronchoscopy and robotic bronchoscopy simulator"
+type: software
+version: 0.2.0
+date-released: 2026-10-25
+doi: 10.5281/zenodo.23644439
+license: MIT
+authors:
+  - family-names: Singh
+    given-names: Aditya
+repository-code: "https://github.com/dradityaaiims-cloud/bronchoscopy-sim"
+keywords: [bronchoscopy, robotic bronchoscopy, medical education, simulation, three.js]
+references:
+  - type: article
+    authors:
+      - family-names: Støverud
+        given-names: Karen-Helene
+    title: "AeroPath: an airway segmentation benchmark dataset with challenging pathology and baseline method"
+    journal: PLoS ONE
+    volume: 19
+    issue: 10
+    start: e0311416
+    year: 2024
+    doi: 10.5281/zenodo.10069289
+    notes: "Data (CC BY 4.0). CT overlay derived from case 18."

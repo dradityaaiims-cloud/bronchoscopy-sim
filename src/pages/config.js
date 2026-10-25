@@ -2,6 +2,7 @@
 export const CONFIG = {
   version: '0.2.0',
   year: 2026,
+  doi: '10.5281/zenodo.23644439',
   title: "Dr. Singh's Bronchoscopy Simulator: an open educational bronchoscopy and robotic bronchoscopy simulator",
   // Contact email split so it is not plain text in the page source (reduces scraping).
   emailUser: 'draditya.aiims',
