@@ -16,9 +16,6 @@ const ME = {
     ['Writing on Medium', 'https://medium.com/@draditya.aiims'],
   ],
   apps: [
-    ['Pulmonary hypertension interactive pathophysiology', 'https://pulmhtnpathology.netlify.app'],
-    ['Pulmonary hypertension expert interactive learning app', 'https://pulmhtn.netlify.app'],
-    ['CRT-PHR navigator protocol', 'https://andromeda2.netlify.app'],
     ["Dr. Singh's Vent Sim (mechanical ventilator simulator)", 'https://dradityaaiims-cloud.github.io/vent-sim/'],
   ],
 };

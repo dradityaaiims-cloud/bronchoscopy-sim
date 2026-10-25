@@ -11,15 +11,15 @@
 
 ## Abstract
 
-**Background.** Learning bronchoscopic anatomy and the workflow of robotic-assisted peripheral bronchoscopy usually depends on scarce clinical exposure or on proprietary simulators. Free, accessible tools for the cognitive parts of this training are limited. [CITE]
+**Background:** Learning bronchoscopic anatomy and the workflow of robotic-assisted peripheral bronchoscopy depends on scarce clinical exposure or on costly proprietary simulators. Free, accessible tools for the cognitive components of this training are limited.
 
-**Objective.** To describe the design, implementation and limits of an open-source, browser-based educational simulator covering segmental airway anatomy, mediastinal lymph node stations, endobronchial ultrasound (EBUS) and CT guidance, and a game-style robotic bronchoscopy case workflow.
+**Objective:** To describe the design, implementation and limitations of an open-source, browser-based educational bronchoscopy simulator.
 
-**Methods.** The simulator is written in JavaScript with three.js and runs entirely in the browser with no server and no data collection. A procedural tracheobronchial tree is generated from standard segmental nomenclature and rendered as a raymarched first-person endoscopic view beside a 3D map. Sixteen IASLC lymph node stations are modelled, and a convex-EBUS image and live CT slices are computed from geometry. A real airway CT from the public AeroPath dataset (CC BY 4.0) is registered to the procedural skeleton by landmarks. A robotic mode provides eight synthetic cases with planning, shape-sensing-style navigation, CT-to-body divergence, radial EBUS, simulated cone-beam CT, sampling tools and scored teaching feedback.
+**Methods:** The simulator is written in JavaScript with three.js and runs entirely in the browser, with no server and no data collection. A procedural tracheobronchial tree generated from standard segmental nomenclature drives a raymarched endoscopic view beside a 3D map. It models 16 IASLC lymph node stations and computes a convex endobronchial ultrasound (EBUS) image and CT slices from geometry. An airway CT from the public AeroPath dataset (CC BY 4.0) is registered to the procedural skeleton by landmarks; its segment labels are transferred automatically and are not expert annotations. A robotic mode provides eight synthetic cases with route planning, shape-sensing-style navigation, CT-to-body divergence, radial EBUS, simulated cone-beam CT, tool sampling and scored teaching feedback.
 
-**Results.** The software is deployed as a static website, archived with a DOI, and covered by 33 automated tests of the anatomy, scope kinematics, guidance and case-scoring logic. [Add any measured performance, e.g. frame rates on named devices, only if you measure them.]
+**Results:** The simulator is deployed as a static website, released under the MIT licence, archived with a DOI (10.5281/zenodo.23644439) and covered by 33 automated tests of anatomy, scope kinematics, guidance geometry and case scoring. No learner outcome or usability data were collected.
 
-**Conclusions.** The simulator offers a free, no-install platform for teaching bronchoscopic anatomy and robotic workflow concepts. **It has not been validated for clinical use or for assessing competence**, and it does not teach technique, device handling or safety. Educational effectiveness has not been evaluated.
+**Conclusions:** An open, no-install simulator for bronchoscopic anatomy and robotic workflow concepts can be built and distributed at no cost. It is for education only. It has not been validated for clinical use or for assessing competence, it does not teach technique or device handling, and its educational effectiveness has not been evaluated.
 
 **Keywords:** bronchoscopy; robotic bronchoscopy; medical education; simulation; open-source software; endobronchial ultrasound
 
