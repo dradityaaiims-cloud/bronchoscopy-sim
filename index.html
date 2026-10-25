@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bronchoscopy Simulator</title>
+  <meta name="description" content="Educational bronchoscopy anatomy trainer. Not for clinical use. No patient data." />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">Bronchoscopy<span>Simulator</span></div>
+    <nav id="modeTabs" aria-label="Mode">
+      <button data-mode="explore" class="active">Free explore</button>
+      <button data-mode="quiz">Where am I?</button>
+      <button data-mode="navigate">Navigate to target</button>
+      <button data-mode="robotic">Robotic case</button>
+      <button id="navLearn" class="learn-tab">Learn</button>
+      <button id="navModel" class="learn-tab">Model &amp; limits</button>
+      <button id="navAbout" class="learn-tab">About</button>
+    </nav>
+    <div class="tools">
+      <button id="btnLabels" title="Toggle labels (L)">Labels <kbd>L</kbd></button>
+      <button id="btnReset" title="Reset to carina (R)">Reset <kbd>R</kbd></button>
+      <button id="btnEbus" title="Convex EBUS (E): Free explore and Navigate">EBUS <kbd>E</kbd></button>
+      <button id="btnCt" title="CT guidance (C): Free explore and Navigate">CT <kbd>C</kbd></button>
+      <button id="btnTour" title="Guided tour">Tour</button>
+      <button id="btnHelp" title="Help (H)">Help <kbd>H</kbd></button>
+    </div>
+  </header>
+
+  <main id="split">
+    <section id="scopePane" aria-label="Bronchoscope view">
+      <div id="scopeMount"></div>
+      <div id="rim" aria-hidden="true"></div>
+      <div id="robo">
+        <div class="chip" id="chipVision">VISION</div>
+        <div id="crumb"></div>
+        <div class="chip" id="statusChip"></div>
+        <div id="gauges"><div id="artic"></div><div id="depth"></div></div>
+      </div>
+      <div id="readout" aria-live="polite">
+        <div id="roLabel"></div>
+        <div id="roName"></div>
+        <div id="roMeta"></div>
+        <div id="roStations"></div>
+      </div>
+      <div id="notice" hidden></div>
+    </section>
+
+    <section id="overviewPane" aria-label="3D lungs overview">
+      <div id="overviewMount"></div>
+      <div id="overviewLabels"></div>
+      <div id="legend"></div>
+      <div class="chip" id="chipMap">3D AIRWAY MAP</div>
+      <div id="paneBtns">
+        <button id="btnView" title="Reset 3D view">Reset view</button>
+        <button id="btnNodes" class="on" title="Lymph node stations (N)">Nodes <kbd>N</kbd></button>
+        <button id="btnTip" class="on" title="Bright red dot at the scope tip (B)">Tip dot <kbd>B</kbd></button>
+        <button id="btnVessels" class="on" title="Heart, vessels, esophagus (V)">Vessels <kbd>V</kbd></button>
+      </div>
+      <div id="ctPanel" hidden>
+        <div class="cap">CT OVERLAY</div>
+        <label>Model <input id="ctFade" type="range" min="0" max="100" value="0" aria-label="Fade between procedural model and CT airway"> CT</label>
+        <label class="chk"><input id="ctLines" type="checkbox"> Labelled centerlines</label>
+        <div class="src">AeroPath case 18, CC BY 4.0 (SINTEF / St. Olavs). Labels transferred by landmark registration.</div>
+      </div>
+      <div id="sectionBar">
+        <span class="cap">SECTION</span>
+        <div class="gtabs" id="secTabs">
+          <button data-ax="" class="active">Off</button><button data-ax="y">Axial</button><button data-ax="z">Coronal</button><button data-ax="x">Sagittal</button>
+        </div>
+        <input id="secPos" type="range" min="-190" max="125" value="-20" disabled aria-label="Cross-section position (mm)">
+        <label class="chk"><input id="secFollow" type="checkbox"> at tip</label>
+        <button id="secFlip" class="mini" title="Keep the other side">Flip</button>
+        <button id="secCt" class="mini" title="Open the matching CT slice">CT slice</button>
+      </div>
+      <div id="nodeCard" hidden></div>
+    </section>
+  </main>
+
+  <section id="learn" aria-label="Learn"></section>
+  <section id="page" class="learn-body" aria-label="Page"></section>
+  <section id="modePanel"></section>
+  <footer id="disclaimer">Educational use only · Not for clinical use · Contains no patient data · Anatomy is schematic</footer>
+
+  <div id="help" hidden>
+    <div class="card">
+      <h2>Bronchoscopy Simulator</h2>
+      <p class="warn">Educational use only. Not a medical device, not for clinical use or planning. No patient data.</p>
+      <table>
+        <tr><td><kbd>W</kbd> / <kbd>S</kbd></td><td>Advance / withdraw (hold <kbd>Shift</kbd> for fine control)</td></tr>
+        <tr><td><kbd>A</kbd> / <kbd>D</kbd></td><td>Rotate the shaft counter-clockwise / clockwise (roll)</td></tr>
+        <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Tip flexion / extension (the tip bends toward the top of the image)</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>Straighten the tip</td></tr>
+        <tr><td><kbd>R</kbd></td><td>Reset to the carina</td></tr>
+        <tr><td><kbd>L</kbd></td><td>Hide / show all labels (self-testing)</td></tr>
+        <tr><td><kbd>N</kbd> / <kbd>V</kbd></td><td>Show / hide lymph node stations (click one for details) / mediastinal vessels</td></tr>
+        <tr><td><kbd>E</kbd> / <kbd>C</kbd></td><td>Free explore / Navigate: convex EBUS panel (lymph nodes, vessels) / live CT guidance with node stations</td></tr>
+        <tr><td><kbd>X</kbd></td><td>3D map: cycle the cross-section (off, axial, coronal, sagittal); drag the SECTION slider to move the cut</td></tr>
+        <tr><td><kbd>B</kbd></td><td>Show / hide the bright red scope-tip dot on the 3D map</td></tr>
+        <tr><td><kbd>G</kbd></td><td>Robotic-style display on / off (bezel, articulation gauge, depth, route)</td></tr>
+        <tr><td><kbd>M</kbd></td><td>Cycle mode</td></tr>
+        <tr><td><kbd>1</kbd>–<kbd>4</kbd> <kbd>Enter</kbd></td><td>Quiz: answer / next question</td></tr>
+        <tr><td><kbd>T</kbd></td><td>Navigate: show / hide route hint</td></tr>
+        <tr><td><kbd>P</kbd></td><td>Robotic case: remove / reinsert the vision probe (probe out = camera off, catheter locked)</td></tr>
+        <tr><td><kbd>E</kbd> / <kbd>C</kbd></td><td>Robotic case: radial EBUS (probe out) / cone-beam CT</td></tr>
+        <tr><td><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>Enter</kbd></td><td>Robotic case: needle / forceps / brush, then take the sample</td></tr>
+        <tr><td><kbd>H</kbd></td><td>This help</td></tr>
+      </table>
+      <h3>Tips</h3>
+      <ul>
+        <li>At a carina, flex the tip and roll the shaft until a lumen is centred, then advance. Rolling with a flexed tip sweeps the aim around.</li>
+        <li>The 3D compass (bottom right of the scope view) shows the patient's axes as seen from the scope: <b>A</b>nterior/<b>P</b>osterior, <b>R</b>ight/<b>L</b>eft, <b>S</b>uperior/<b>I</b>nferior. Letters nearer to you are brighter. At roll 0 anterior is at 12 o'clock and the right lung is on the right of the screen.</li>
+        <li>The articulation gauge plots the tip bend (distance from centre) and the direction it points around the airway (angle).</li>
+        <li>Drag in the right panel to rotate the 3D lungs; scroll to zoom.</li>
+      </ul>
+      <p class="hint">Press <kbd>H</kbd> or click to close.</p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
