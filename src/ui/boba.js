@@ -5,7 +5,7 @@ import { nextRule, GENERAL } from './bobaRules.js';
 export function initBoba({ getCtx, onTour, onLearn }) {
   const KEY = 'bsim-boba-quiet';
   let quiet = false; try { quiet = localStorage.getItem(KEY) === '1'; } catch { /* private mode */ }
-  const fired = new Map();
+  const fired = new Map(), asked = new Map(); // asked: tips already shown to this click/"Another tip" run
   let lastProactive = Date.now() - 30e3, generalIdx = Math.floor(Math.random() * GENERAL.length);
   let hideTimer = null, lastActive = Date.now(), asleep = false;
 
@@ -38,13 +38,14 @@ export function initBoba({ getCtx, onTour, onLearn }) {
     bubble.hidden = false; anim('wag', 900);
     clearTimeout(hideTimer); if (autoHide) hideTimer = setTimeout(close, autoHide);
   }
-  function close() { bubble.hidden = true; clearTimeout(hideTimer); }
+  function close() { bubble.hidden = true; clearTimeout(hideTimer); asked.clear(); }
 
   // a tip for the current situation if one applies, otherwise the next general tip
   function tip(forceNew = false) {
     const ctx = getCtx(), now = Date.now();
-    const r = nextRule(ctx, forceNew ? new Map() : fired, now);
-    if (r) { fired.set(r.key, now); return say(r.text(ctx)); }
+    // a fresh Map here made "Another tip" return the same first matching rule every time
+    const r = nextRule(ctx, forceNew ? asked : fired, now);
+    if (r) { fired.set(r.key, now); asked.set(r.key, now); return say(r.text(ctx)); }
     generalIdx = (generalIdx + 1) % GENERAL.length; say(GENERAL[generalIdx]);
   }
 
