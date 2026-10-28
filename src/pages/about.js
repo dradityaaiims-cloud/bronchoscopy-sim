@@ -17,6 +17,7 @@ const ME = {
   ],
   apps: [
     ["Dr. Singh's Vent Sim (mechanical ventilator simulator)", 'https://dradityaaiims-cloud.github.io/vent-sim/'],
+    ["Dr. Singh's RHC Sim (right heart catheterization simulator)", 'https://dradityaaiims-cloud.github.io/rhc-sim/'],
   ],
 };
 
